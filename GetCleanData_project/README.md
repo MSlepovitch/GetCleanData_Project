@@ -11,7 +11,7 @@ The script run_analysis.R goes through the following steps:
 1.  Merges the training and the test sets to create one data set.  Files 'train/X_train.txt' and 'test/X_test.txt'  are combined, files 'train/y_train.txt' and 'test/y_test.txt'  are combined and files 'train/subject_train.txt' and 'test/subject_test.txt' are combined.   The resulting variable names are "X_combine", 
 "y_combine" and "subject_combine".
 
-2.  Extracts only the measurements on the mean and standard deviation for each measurement.  All the variables in the data set are listed in file 'features.txt'.  The contents of the file 'features.txt' are searched for strings containing either "mean" or "std".  Based on this information, appropriate columns are extracted from the "X_combine" variable into "X_combine_mean_std" variable.
+2.  Extracts only the measurements on the mean and standard deviation for each measurement.  All the variables in the data set are listed in file 'features.txt'.  The contents of the file 'features.txt' are searched for strings containing either "mean" (but not "meanFreq") or "std".  Based on this information, appropriate columns are extracted from the "X_combine" variable into "X_combine_mean_std" variable.
 
 3.  Adds descriptive activity names to name the activities in the data set.   The activities for each set are listed in 'train/y_train.txt' and 'test/y_test.txt' ; they are coded as numbers 1-6.  File 'activity_labels.txt' has the activity description for each of the numeric codes.  Variable "activities" is createdbased on "y_combine" variable and file 'activity_labels.txt'  and stores the descriptive activity names for the combined set
 
