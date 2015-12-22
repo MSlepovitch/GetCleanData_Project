@@ -18,10 +18,10 @@ run_analysis.R <- function (directory){
   
   ## Extract only the mean and standard deviation data
   
-    substring="mean|std"
+    substring="mean(?!Freq)|std"
     FeatureNames<-(read.table (paste(directory,"/features.txt", sep = ""),sep=""))[,"V2", drop = FALSE]
   
-    X_combine_mean_std<-X_combine[,grep(substring,FeatureNames[,1])]
+    X_combine_mean_std<-X_combine[,grep(substring,FeatureNames[,1], perl = TRUE)]
   
     
   ## assign descriptive activity names to the activities in the data set
@@ -32,13 +32,13 @@ run_analysis.R <- function (directory){
   ## label the data set with descriptive variable names
   
     colnames(subject_combine)<-"subject"
-    colnames(X_combine_mean_std)<-grep(substring,FeatureNames[,1], value=TRUE)
+    colnames(X_combine_mean_std)<-grep(substring,FeatureNames[,1], value=TRUE, perl = TRUE)
   
     CleanData<-cbind(subject_combine,activities,X_combine_mean_std, deparse.level = 0)
   
   ## create a second, independent tidy data set with the average of each variable for each activity and each subject
   
-    headings<-c("Subject", "Activity", paste("Avg_",grep(substring,FeatureNames[,1], value=TRUE),sep=""))
+    headings<-c("Subject", "Activity", paste("Avg_",grep(substring,FeatureNames[,1], value=TRUE, perl = TRUE),sep=""))
   
     TidyData<-aggregate(CleanData[,c(3:dim(CleanData)[2])],list(CleanData$subject, CleanData$activities), mean)
     colnames(TidyData)<-headings
